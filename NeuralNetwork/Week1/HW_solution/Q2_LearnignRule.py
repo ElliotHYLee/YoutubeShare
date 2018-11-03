@@ -14,22 +14,26 @@ def predict(x,w):
 
 def main():
     # the first column is for bias = 1
-    pointA = np.array([1,0,1])
-    pointB = np.array([1,1,0])
+    pointA = np.array([1,0.5,1])
+    pointB = np.array([1,1,0.5])
+    pointC = np.array([1,1,0.5])
     labelA = 1
     labelB = -1
-
+    labelC = -1
     w = np.array([0,0,0])
     eta = 0.5
-    for i in range(0,2):
+    #for i in range(0,2):
+    for i in range(0,3):
         errorA = labelA - predict(pointA, w)
         errorB = labelB - predict(pointB, w)
-        dw = eta*errorA*pointA + eta*errorB*pointB
+        errorC = labelC - predict(pointC, w)
+        dw = eta*errorA*pointA + eta*errorB*pointB + eta*errorC*pointC
         w = w + dw
         print(w)
 
     print(labelA == predict(pointA, w))
     print(labelB == predict(pointB, w))
+    print(labelC == predict(pointC, w))
 
 if __name__ == '__main__':
     main()
